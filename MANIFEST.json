@@ -3,13 +3,9 @@
     "bytes": 365,
     "sha256": "1fa8b03745f8268d2a5a1e9ea4c4552ca74e71115010d65c492bdb37ff32ad6c"
   },
-  "CITATION.cff": {
-    "bytes": 905,
-    "sha256": "6eb8658a2f5a05f9e1080577394f96df8bf04022b532d8c1c22b887642c242a6"
-  },
   "README.md": {
-    "bytes": 5355,
-    "sha256": "07cff79f98a83689b1058d42628b2058c87a399d78a8fa719a8ace07b6a8966f"
+    "bytes": 5376,
+    "sha256": "d855bbc3a89779975fe9ed694e1e502a73bdb23fa6dae5e33a74f7abccb721d0"
   },
   "analysis/analyze_retained_bundle.py": {
     "bytes": 2383,

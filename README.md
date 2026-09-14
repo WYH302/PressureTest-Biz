@@ -2,7 +2,6 @@
 
 Research code for **Tracing Action Recommendations under Business Operational Cues: A Paired Analysis of Language Model Outputs**.
 
-**Paper authors:** Yonghao Wu, Minglong Li, Zihua Liu, Xixue Liu, and Hoi Leong Lee.  
 **Repository maintainer:** Yonghao Wu ([WYH302](https://github.com/WYH302)).
 
 PressureTest-Biz studies paired changes in language-model action recommendations under business operational cue packages. This release contains scenario construction, action-analysis and audit utilities, plus retained aggregate data and an offline checking script. It is an attributed research-code release, not an anonymous submission package.
@@ -56,11 +55,11 @@ Additional materials actually retained by the authors may be requested through t
 
 ## Attribution and reuse
 
-Use [CITATION.cff](CITATION.cff) for the paper authors and title. No DOI or publication venue is assigned in this release. A software reuse license has not yet been selected by the authors; public visibility is not a blanket grant of reuse rights. Contact the maintainer about permission until a license is added.
+Yonghao Wu is the public contact and maintainer for this repository. Collaborator names and contact details are omitted from the repository metadata for privacy; this does not assert sole authorship of the associated research. Use the author-approved manuscript for its bibliographic citation. No DOI or publication venue is assigned in this release. A software reuse license has not yet been selected; public visibility is not a blanket grant of reuse rights. Contact the maintainer about permission until a license is added.
 
 ## Funding
 
-This work was supported in part by the Ministry of Higher Education Malaysia under the Fundamental Research Grant Scheme (FRGS) [Grant No. FRGS/1/2025/ICT02/UNIMAP/02/2].
+This research received no specific grant from any funding agency.
 
 ## 中文说明
 
