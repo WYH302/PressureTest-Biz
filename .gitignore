@@ -1,0 +1,24 @@
+# Credentials and private working material
+.env
+.env.*
+*.pem
+*.key
+private/
+**/private/
+*.log
+
+# Local runtimes and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+Thumbs.db
+analysis/reproduced/
+main_dataset/
+boundary_recovery_study/
+archived_human_validation_v2/
+mechanism_decomposition_study/
+results/
+docs/main_dataset*_datasheet.md

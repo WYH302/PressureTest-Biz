@@ -1,0 +1,130 @@
+{
+  ".gitignore": {
+    "bytes": 365,
+    "sha256": "1fa8b03745f8268d2a5a1e9ea4c4552ca74e71115010d65c492bdb37ff32ad6c"
+  },
+  "CITATION.cff": {
+    "bytes": 905,
+    "sha256": "6eb8658a2f5a05f9e1080577394f96df8bf04022b532d8c1c22b887642c242a6"
+  },
+  "README.md": {
+    "bytes": 5355,
+    "sha256": "07cff79f98a83689b1058d42628b2058c87a399d78a8fa719a8ace07b6a8966f"
+  },
+  "analysis/analyze_retained_bundle.py": {
+    "bytes": 2383,
+    "sha256": "660acedd0c270a4ca5e6cdabb3606b7d6447ef07c0148a687793dd57d70a9689"
+  },
+  "analysis/sources/cell_planned_contrasts.csv": {
+    "bytes": 36383,
+    "sha256": "192f8ac4bde38eef4db829487ae159c74f5de2add9242438c97a2b9ee310b6bb"
+  },
+  "analysis/sources/cell_variant_summary.csv": {
+    "bytes": 13098,
+    "sha256": "d8d8aa1f167a3b983159919d18db085d7bdfa973c0191aaaa008c818a5a33020"
+  },
+  "docs/EVIDENCE_SCOPE.md": {
+    "bytes": 3410,
+    "sha256": "4252fd08362865063efd479e2bcda1db0f7df1bdf167edbc30a1ce7854d1ded0"
+  },
+  "requirements-analysis.txt": {
+    "bytes": 132,
+    "sha256": "7e16e83447f36fa55d9d9c13908bd992b8f1c52d758c29d2a9aab31025fab5b4"
+  },
+  "scripts/analyze_archived_human_validation.py": {
+    "bytes": 8265,
+    "sha256": "cb93c7aa0b940aa59deb9f22d22da8833665fd183a0b119266ae5d79523435d1"
+  },
+  "scripts/analyze_boundary_crossings.py": {
+    "bytes": 57267,
+    "sha256": "76ef9d9d21e721c1d126cff8d22713faa61e8ddd5e8d3898d4566bc5020bf218"
+  },
+  "scripts/analyze_structural_alignment.py": {
+    "bytes": 23815,
+    "sha256": "ddc4d171ea89d2336be86d8df319635b3e4b96d5af024950e3ee97b7159582d2"
+  },
+  "scripts/build_archived_human_validation_pack.py": {
+    "bytes": 31792,
+    "sha256": "f90e705bc81de55f1be527a75139fca4fc9ff85036c792e7f24db19978bf55a1"
+  },
+  "scripts/build_boundary_recovery_dataset.py": {
+    "bytes": 17519,
+    "sha256": "0292fd614425db45c60dc793ff82aa25c78aeed73f511dd345323189c8c5180a"
+  },
+  "scripts/build_boundary_recovery_round2.py": {
+    "bytes": 25350,
+    "sha256": "842e0b3a92d4f4b9478338184a5101d3060b5313a0bafcfa3c1bc889a1718944"
+  },
+  "scripts/build_budget200_direct_choice.py": {
+    "bytes": 9969,
+    "sha256": "b7d1c61dd1ae9b42b38c53c8d137ad7f53cb7303fc86764ce7ca3aeff99511b0"
+  },
+  "scripts/build_combined_mechanism_release.py": {
+    "bytes": 16605,
+    "sha256": "47a4da8c20b59cd6e09d87de77158c6f85f8a50b1095a8a329615d896082bca0"
+  },
+  "scripts/build_human_calibration_packs.py": {
+    "bytes": 32173,
+    "sha256": "6ae11df54467c28af752d9a2d9e4b3e63a4a7ff42d4a36a7b5cbd5ce665ac0b1"
+  },
+  "scripts/build_main_dataset.py": {
+    "bytes": 56442,
+    "sha256": "cb4378c9e177935e0a40b00a4ee016ea733e296b6b788e8889f18b736ba44096"
+  },
+  "scripts/build_mechanism_decomposition_dataset.py": {
+    "bytes": 15246,
+    "sha256": "859be38943f3ce3e6e086f8823cfb567b02a20cd7eb7eed60b2aaa78e410fc3d"
+  },
+  "scripts/build_pilot_dataset.py": {
+    "bytes": 48828,
+    "sha256": "f47ec0ccc8e9624ebd7bfc5b0fa9cdb8ca67d3a2c3ced0d72b1702b9f75fe9e0"
+  },
+  "scripts/combine_boundary_rounds.py": {
+    "bytes": 15083,
+    "sha256": "b6acd4d88c9f586fd2c071bc5f60e59652d19a5254775cf1f70a4950b85c9ca4"
+  },
+  "scripts/compare_behavioral_endpoints.py": {
+    "bytes": 11116,
+    "sha256": "d21dcb687d00219dc5fc7bae7a4c4edc636edcb21459514e181df0770c843e79"
+  },
+  "scripts/finalize_boundary_audit.py": {
+    "bytes": 18324,
+    "sha256": "ef8f752b0a6220f6d2253176d46f99f9273cca5c981a43ea663c945be7b50c00"
+  },
+  "scripts/finalize_mechanism_audit.py": {
+    "bytes": 13027,
+    "sha256": "0644c636f270122582ae1dffd6d7344daf0a61a62a1b93a4a7ae6c1a39a682ad"
+  },
+  "scripts/make_boundary_crossing_figure.py": {
+    "bytes": 9559,
+    "sha256": "f30a5ded0580271441e611e4e9bb522b5cb3894c1afbcb0ad3e3fed9fa945fe7"
+  },
+  "scripts/make_mechanism_results_figure.py": {
+    "bytes": 10718,
+    "sha256": "422a0d5154924c1dac7381ae7c70e46c90c61e23589aab107480ea690b62b5db"
+  },
+  "scripts/make_study_overview_figure.py": {
+    "bytes": 6250,
+    "sha256": "ee1ad63eaddb8c40856d4a3bc34344483b07489e6a66dae07f90656ab7a25471"
+  },
+  "scripts/power_boundary_design.py": {
+    "bytes": 8199,
+    "sha256": "83795cbe059dc99eb9dd689da43b6a17b27df611081c017c42b4f5811a64531d"
+  },
+  "scripts/validate_main_dataset.py": {
+    "bytes": 11027,
+    "sha256": "3748b1aa52cbaa1b817f3a62d3b772aaff040ca05aebfee2cfc722b0d5ea7b40"
+  },
+  "scripts/validate_pilot_dataset.py": {
+    "bytes": 6096,
+    "sha256": "7bfd067066525afa9b50c2c6e1632e84c92c50bee61c00d3c45218c96a98780f"
+  },
+  "tests/test_main_dataset.py": {
+    "bytes": 7207,
+    "sha256": "a3467457dbfc29f8a85bb2140d2305110c601704cb8c802aafde58a3c2efed19"
+  },
+  "tests/test_release_offline.py": {
+    "bytes": 2158,
+    "sha256": "b460a15d254b9fb1b2bd9b95dec4a44e0090ea14a3c5c38f3674fdf4d881173b"
+  }
+}
