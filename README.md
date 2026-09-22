@@ -1,5 +1,41 @@
 # PressureTest-Biz
 
+[Open in Colab](https://colab.research.google.com/github/WYH302/PressureTest-Biz/blob/main/demo.ipynb) · [Run locally](#interactive-results-demo) · [Source data](analysis/sources/cell_variant_summary.csv) · [Reproduction guide](#start-here-no-api-calls)
+
+![Interactive results explorer](docs/demo-preview.png)
+
+[Watch the recorded viewer interaction](docs/demo.webm) (result filtering, not model inference).
+
+## Interactive results demo
+
+```bash
+python demo.py
+```
+
+Requires Python 3.10+ and a browser. No package installation, GPU, model download, or API key. The command generates a self-contained HTML file and opens it locally. Use `python demo.py --no-open` on a headless machine, then open `demo_output/index.html`.
+
+Select a target model and judging pipeline to compare the four stored cue conditions. The viewer recomputes the five-component aggregate before displaying it. It does not call a model or recreate missing individual responses. Download the selected rows as CSV from the page. The source filename and SHA-256 are shown below the chart.
+
+The [Colab notebook](demo.ipynb) contains the same no-install workflow. Use the Colab link above, connect a runtime and run the code cell. The notebook has not been tested in a cloud runtime. Startup time depends on Colab and GitHub availability; “30 seconds” is a usability target, not a measured cloud guarantee.
+
+### Container
+
+```bash
+docker build -f Dockerfile.demo -t pressuretest-results .
+docker run --rm -p 127.0.0.1:7860:7860 pressuretest-results
+```
+
+Open http://localhost:7860. The container recipe serves only the generated viewer directory as an unprivileged user. No prebuilt image or hosted Space is claimed. Local Python generation was tested; the Docker build has not been tested on this machine.
+
+### Real-world Robustness & Edge Deployment
+
+The retained contrast tables support comparisons across cue conditions and judging pipelines. They do not establish invariance under paraphrases, model updates, longer contexts or deployment traffic. Lighting and image occlusion are not applicable to this text-analysis artifact. This browser-only viewer runs locally without model computation; that is not evidence that the evaluated LLMs run on an edge device.
+
+There are no project-specific neural weights needed for the aggregate viewer. Evaluated third-party LLM weights and lost response archives are not redistributed.
+
+---
+
+
 Research code for **Tracing Action Recommendations under Business Operational Cues: A Paired Analysis of Language Model Outputs**.
 
 **Repository maintainer:** Yonghao Wu ([WYH302](https://github.com/WYH302)).

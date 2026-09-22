@@ -22,3 +22,5 @@ archived_human_validation_v2/
 mechanism_decomposition_study/
 results/
 docs/main_dataset*_datasheet.md
+# Local interactive-viewer output
+demo_output/
