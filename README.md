@@ -95,7 +95,7 @@ Yonghao Wu is the public contact and maintainer for this repository. Collaborato
 
 ## Funding
 
-This research received no specific grant from any funding agency.
+This research was supported by the Department of Science and Technology of Guangdong Province under the Guangdong Provincial Science and Technology Plan (Grant No. MS202500035 to Chang Liu).
 
 ## 中文说明
 
