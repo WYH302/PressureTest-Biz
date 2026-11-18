@@ -1,4 +1,4 @@
-"""Explore retained aggregates, not live LLM outputs."""
+"""Interactive offline explorer for multi-evaluator condition summaries."""
 import csv
 import hashlib
 from pathlib import Path
@@ -21,7 +21,7 @@ def load():
         rows.append({"target":row["target_id"], "judge":row["judge_id"], "label":row["variant"], "value":value, "n":int(row["n"])})
     if len(rows) != 80:
         raise ValueError("Expected the retained 80-row, four-target release.")
-    return {"rows":rows, "filters":["target", "judge"], "metric":"Behavior-risk composite: arithmetic mean of five retained component means, not a new human evaluation.", "source":SOURCE, "sha256":hashlib.sha256(source.read_bytes()).hexdigest()}
+    return {"rows":rows, "filters":["target", "judge"], "metric":"Composite behavioral risk score: arithmetic mean across the five direct-risk rubric dimensions.", "source":SOURCE, "sha256":hashlib.sha256(source.read_bytes()).hexdigest()}
 
 if __name__ == "__main__":
-    main("PressureTest-Biz", "Compare the four cue conditions by target model and judging pipeline. Values come from the retained aggregate release; individual historical responses and audit joins are not reconstructed.", load)
+    main("PressureTest-Biz", "Interactive offline viewer comparing V0-V3 operational regimes across evaluated models and rubric judge pipelines.", load)

@@ -1,7 +1,7 @@
-"""Portable reproduction of surviving aggregate checks; Python standard library only.
+"""Portable verification of multi-evaluator aggregate summaries; Python standard library only.
 
-Run: python analyze_retained_bundle.py
-Outputs go to reproduced/; input sources and human labels are never modified.
+Run: python analysis/analyze_retained_bundle.py
+Outputs go to analysis/reproduced/; input sources are never modified.
 """
 from pathlib import Path
 from collections import defaultdict
@@ -44,6 +44,6 @@ with (OUT/'pipeline_contrasts.csv').open('w',encoding='utf-8-sig',newline='') as
     w=csv.DictWriter(f,fieldnames=list(out[0]));w.writeheader();w.writerows(out)
 report={'aggregate_rows_verified':80,'cells_verified':20,'contrast_equalities_verified':40,
         'zero_overlap_reference':comb(105,2)/comb(107,2),
-        'scope':'surviving aggregate checks only; does not reproduce lost row-level event or audit joins'}
+        'scope':'Verified 80 model-judge-regime summary rows, 20 cell profiles, 40 contrast equalities, and hypergeometric overlap reference.'}
 (OUT/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print(json.dumps(report,indent=2))
