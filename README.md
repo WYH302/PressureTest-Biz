@@ -45,11 +45,13 @@ All Study 2 datasets (`study2/datasets/`), portable reproduction scripts (`study
 | **Evaluation-Awareness Ablation** | `480` paired prompts (`MS`, `MB` clean memo vs. explicit `Pressure condition V2/V3`) | Meta-labels artificially suppress shortcut probability (`-27.3%` rel. on 3B, `Wilcoxon p = 1.24e-18`; R1-7B `p = 5.15e-17`) |
 | **Same-Backbone Dual-Process CoT** | `Qwen2.5-7B-Instruct` vs. `DeepSeek-R1-Distill-Qwen-7B` (Sys-1 direct vs. Sys-2 full CoT on exact matched `80`-case cohort) | Distilled Sys-1 drift jumps ~10×; unobstructed CoT (`2,314`-char mean reasoning) recovers compliance **4.3–19×** (`MR: 23.75% -> 1.25%`, `p = 4.01e-5`) |
 | **Quantization Safety Curve** | Identical `Qwen2.5-7B-Instruct` weights across `BF16`, `INT8`, `NF4` (`5,760` trials) | `BF16 ≈ INT8` bit-for-bit across all 8 arms; 4-bit `NF4` doubles prompt regrounding (`MR`) residual error (`0.83% -> 1.67%`) |
-| **Stage 2 Local NLI Cascade** | `9`-cell window sweep + `DeBERTa-v3-large-mnli` over `1,200` full generations | `pre6_post5` Pareto elbow (`93.3%`, `0` FP); Stage 2 adds `+13.75` to `+17.00 pp` coverage at **`99.72%`** Choice–Action concordance (`1,074/1,077`) |
+| **Stage 2 Local NLI Cascade** | `9`-cell window sweep + `DeBERTa-v3-large-mnli` over `2,480` full generations across **5 open & frontier models** | `pre6_post5` Pareto elbow (`93.3%`, `0` FP); rescues paraphrastic frontier models by **`+76.6` to `+81.9 pp`** (`100%` agr., `1,100/1,100`), **`99.86%`** pooled concordance (`2,174/2,177`) |
+| **Closed-Weight Frontier Telemetry** | `GPT-6.2-Sol` (`medium`) & `GPT-6.1-Terra` (`high`) across matched `80` scenarios × `8` arms + `160` EA-meta (`1,600` calls) | **`0.00%` crossing ceiling (`0/1,600`)**; replicated **fast coercion reflex** at `MH` (`-20.7%` / `-25.8%`, `p <= 1.83e-3`) vs. **`+59.7%` / `+61.4%` constraint-regrounding surge** at `MR` (`p <= 1.30e-5`); sub-threshold EA token shift (`p = 0.031`) |
 | **White-Box Probing & CAA** | `60` calibration / `180` disjoint held-out scenarios, mid-late layer sweep (`alpha = 0..4`) | Pressure collapses compliance projection `4.4–9.3` units; zero-training CAA cuts `MB` by **`-61.1%`** (3B, `p=0.036`), **`-66.7%`** (7B), **`-34.5%`** (R1-7B, `p=0.029`) with `0` baseline harm |
 
 ![Study 2 Mechanism Decomposition, Dual-Process CoT Recovery, and Quantization Curve](docs/study2_mechanism_dualprocess.png)
-![Study 2 White-Box Geometry, CAA Steering, and Stage 2 NLI Cascade](docs/study2_whitebox_caa_nli.png)
+![Study 2 White-Box Geometry, CAA Steering, and 5-Model Stage 2 NLI Cascade](docs/study2_whitebox_caa_nli.png)
+![Study 2 Closed-Weight Frontier Reasoning-Token Telemetry](docs/study2_frontier_telemetry.png)
 
 ---
 
@@ -154,8 +156,9 @@ If you use **PressureTest-Biz**, our sanitized 8-arm executive memo suite, two-s
   2. 480 条配对实验直接量化显性标签诱发的**评测感知（Evaluation Awareness）**（3B 违规概率相对压低 `-27.3%`，Wilcoxon $p = 1.24\times 10^{-18}$）；
   3. 同底座 7B（`Qwen2.5-7B-Instruct` vs. `DeepSeek-R1-Distill-Qwen-7B`）呈现剧烈**双系统分离**：强制直答时违规率飙升近 10 倍，放开完整 Chain-of-Thought 思考后匹配样本违规率**骤降 4.3–19 倍**（`MR: 23.75% -> 1.25%`，$p = 4.01\times 10^{-5}$）；
   4. `BF16` 与 `INT8` 在全部 8 臂上几乎逐比特一致，而 4-bit `NF4` 使约束重锚定 `MR` 残余违规翻倍（`0.83% -> 1.67%`）；
-  5. Stage 1 精确锚点（9 格扫参验证 `pre6_post5 = 93.3%`）+ Stage 2 本地 `DeBERTa-v3-large-mnli` 级联将决策覆盖率提升 `+13.75` 至 `+17.00 pp`，Choice–Action 一致率达 **99.72%（1,074/1,077）**；
-  6. 零训练白盒残差流 **CAA 激活引导**（60 校准 / 180 独立留出）将复合高压 `MB` 违规率压低 **`-34.5%` 至 `-66.7%`**，且对平静基线 `M0` 零安全税、零额外 token 开销。
+  5. Stage 1 精确锚点（9 格扫参验证 `pre6_post5 = 93.3%`）+ Stage 2 本地 `DeBERTa-v3-large-mnli` 级联覆盖 5 个开源与闭源模型（2,480 条完整回复），将强改写闭源模型覆盖率从 `4.2%–9.2%` 拉升 **`+76.6` 至 `+81.9 pp`**（`100%` 零误差），总 Choice–Action 一致率达 **99.86%（2,174/2,177）**；
+  6. 闭源前沿推理对照（`GPT-6.2-Sol [medium]` 与 `GPT-6.1-Terra [high]`，共 1,600 条匹配请求）建立 **0.00% 违规天花板（0/1,600）**，同时在内部思考 token 遥测中双重验证高管胁迫 `MH` 快速反射压缩（`-20.7%` / `-25.8%`，$p \le 1.83\times 10^{-3}$）与等长约束重锚定 `MR` 深度规范核验激增（`+59.7%` / `+61.4%`，$p \le 1.30\times 10^{-5}$）；
+  7. 零训练白盒残差流 **CAA 激活引导**（60 校准 / 180 独立留出）将复合高压 `MB` 违规率压低 **`-34.5%` 至 `-66.7%`**，且对平静基线 `M0` 零安全税、零额外 token 开销。
 
 ### 2. 快速复现指令
 
