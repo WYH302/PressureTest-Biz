@@ -334,7 +334,7 @@ def write_calibration_pack(
         "Status: implementation complete; human calibration not yet run.\n\n"
         "These 20 training items are outside the formal analysis inventory. Give each annotator only their own delivery "
         "sheet and the applicable codebook. Resolve training disagreements in `private/calibration_resolution.csv`, freeze "
-        "the codebook version, and ask Codex to run `scripts/finalize_human_calibration.py` on this directory before opening "
+        "the codebook version, and run `scripts/finalize_human_calibration.py` on this directory before opening "
         "the formal annotation sheets. `pack_manifest.json` binds the blank issued pack; "
         "`calibration_completion_manifest.json` separately binds the completed A/B, resolution, and personnel files. "
         "Calibration decisions are excluded from reliability and outcome estimates. `personnel_log_template.csv` "

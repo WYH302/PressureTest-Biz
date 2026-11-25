@@ -1,0 +1,336 @@
+{
+  "frontier3_vs_open8b_stratification": [
+    {
+      "target": "DeepSeek-chat",
+      "frontier3_v3_direct_ge2_range_pct": [
+        7.0,
+        7.3
+      ],
+      "frontier3_v3_direct_spread_pp": 0.3,
+      "all5_v3_direct_ge2_range_pct": [
+        7.0,
+        89.0
+      ],
+      "all5_v3_direct_spread_pp": 82.0,
+      "frontier3_v0_ethical_alt_means": {
+        "DeepSeek judge": 1.194,
+        "Gemini pro-low judge": 2.967,
+        "GPT judge": 2.469
+      },
+      "open8b_v0_false_alarm_direct_ge2_pct": {
+        "Qwen judge": 6.3,
+        "Llama judge": 78.6
+      },
+      "frontier3_mean_v3_minus_v0_risk": 0.1215,
+      "open8b_mean_v3_minus_v0_risk": 0.188
+    },
+    {
+      "target": "Gemini",
+      "frontier3_v3_direct_ge2_range_pct": [
+        0.0,
+        0.3
+      ],
+      "frontier3_v3_direct_spread_pp": 0.3,
+      "all5_v3_direct_ge2_range_pct": [
+        0.0,
+        73.8
+      ],
+      "all5_v3_direct_spread_pp": 73.8,
+      "frontier3_v0_ethical_alt_means": {
+        "DeepSeek judge": 1.323,
+        "Gemini pro-low judge": 2.97,
+        "GPT judge": 2.983
+      },
+      "open8b_v0_false_alarm_direct_ge2_pct": {
+        "Qwen judge": 2.3,
+        "Llama judge": 60.4
+      },
+      "frontier3_mean_v3_minus_v0_risk": 0.0008,
+      "open8b_mean_v3_minus_v0_risk": 0.0885
+    },
+    {
+      "target": "Qwen3-8B-Q8_0",
+      "frontier3_v3_direct_ge2_range_pct": [
+        1.8,
+        10.7
+      ],
+      "frontier3_v3_direct_spread_pp": 8.9,
+      "all5_v3_direct_ge2_range_pct": [
+        1.8,
+        86.0
+      ],
+      "all5_v3_direct_spread_pp": 84.2,
+      "frontier3_v0_ethical_alt_means": {
+        "DeepSeek judge": 0.846,
+        "Gemini pro-low judge": 2.64,
+        "GPT judge": 2.76
+      },
+      "open8b_v0_false_alarm_direct_ge2_pct": {
+        "Qwen judge": 5.7,
+        "Llama judge": 68.7
+      },
+      "frontier3_mean_v3_minus_v0_risk": 0.0003,
+      "open8b_mean_v3_minus_v0_risk": 0.1031
+    },
+    {
+      "target": "Llama-3.1-8B-Instruct-Q8_0",
+      "frontier3_v3_direct_ge2_range_pct": [
+        6.5,
+        14.6
+      ],
+      "frontier3_v3_direct_spread_pp": 8.1,
+      "all5_v3_direct_ge2_range_pct": [
+        6.5,
+        74.3
+      ],
+      "all5_v3_direct_spread_pp": 67.8,
+      "frontier3_v0_ethical_alt_means": {
+        "DeepSeek judge": 0.782,
+        "Gemini pro-low judge": 2.648,
+        "GPT judge": 2.76
+      },
+      "open8b_v0_false_alarm_direct_ge2_pct": {
+        "Qwen judge": 6.6,
+        "Llama judge": 68.4
+      },
+      "frontier3_mean_v3_minus_v0_risk": 0.0989,
+      "open8b_mean_v3_minus_v0_risk": 0.128
+    }
+  ],
+  "preference_leakage_4x4": {
+    "matrix": {
+      "DeepSeek": {
+        "DeepSeek": {
+          "mean_risk_v0_v3": 0.0712,
+          "centered_risk": 0.0131,
+          "excess_vs_external_gpt": 0.0475
+        },
+        "Gemini": {
+          "mean_risk_v0_v3": 0.0761,
+          "centered_risk": -0.0125,
+          "excess_vs_external_gpt": 0.0219
+        },
+        "Qwen3-8B": {
+          "mean_risk_v0_v3": 0.2107,
+          "centered_risk": 0.061,
+          "excess_vs_external_gpt": 0.0955
+        },
+        "Llama3.1-8B": {
+          "mean_risk_v0_v3": 0.7065,
+          "centered_risk": 0.086,
+          "excess_vs_external_gpt": 0.1205
+        }
+      },
+      "Gemini": {
+        "DeepSeek": {
+          "mean_risk_v0_v3": 0.0145,
+          "centered_risk": -0.0437,
+          "excess_vs_external_gpt": 0.0829
+        },
+        "Gemini": {
+          "mean_risk_v0_v3": 0.0009,
+          "centered_risk": -0.0877,
+          "excess_vs_external_gpt": 0.0389
+        },
+        "Qwen3-8B": {
+          "mean_risk_v0_v3": 0.0758,
+          "centered_risk": -0.0738,
+          "excess_vs_external_gpt": 0.0527
+        },
+        "Llama3.1-8B": {
+          "mean_risk_v0_v3": 0.4834,
+          "centered_risk": -0.137,
+          "excess_vs_external_gpt": -0.0104
+        }
+      },
+      "Qwen3-8B": {
+        "DeepSeek": {
+          "mean_risk_v0_v3": 0.0412,
+          "centered_risk": -0.0169,
+          "excess_vs_external_gpt": -0.0498
+        },
+        "Gemini": {
+          "mean_risk_v0_v3": 0.0882,
+          "centered_risk": -0.0004,
+          "excess_vs_external_gpt": -0.0334
+        },
+        "Qwen3-8B": {
+          "mean_risk_v0_v3": 0.11,
+          "centered_risk": -0.0397,
+          "excess_vs_external_gpt": -0.0726
+        },
+        "Llama3.1-8B": {
+          "mean_risk_v0_v3": 0.6607,
+          "centered_risk": 0.0403,
+          "excess_vs_external_gpt": 0.0074
+        }
+      },
+      "Llama3.1-8B": {
+        "DeepSeek": {
+          "mean_risk_v0_v3": 0.1056,
+          "centered_risk": 0.0474,
+          "excess_vs_external_gpt": -0.0806
+        },
+        "Gemini": {
+          "mean_risk_v0_v3": 0.1893,
+          "centered_risk": 0.1006,
+          "excess_vs_external_gpt": -0.0275
+        },
+        "Qwen3-8B": {
+          "mean_risk_v0_v3": 0.2021,
+          "centered_risk": 0.0525,
+          "excess_vs_external_gpt": -0.0756
+        },
+        "Llama3.1-8B": {
+          "mean_risk_v0_v3": 0.6311,
+          "centered_risk": 0.0107,
+          "excess_vs_external_gpt": -0.1174
+        }
+      }
+    },
+    "mean_diagonal_excess_vs_gpt": -0.0259,
+    "mean_offdiagonal_excess_vs_gpt": 0.0086,
+    "interpretation": "Negative excess_vs_external_gpt indicates a judge rates a target MORE leniently than external GPT-5.5 after judge-level mean centering; positive indicates stricter rating."
+  },
+  "llama_v2_to_v3_paradox_by_judge": [
+    {
+      "judge": "DeepSeek judge",
+      "is_self_judge": false,
+      "V2_risk": 0.1962,
+      "V3_risk": 0.1032,
+      "V3_minus_V2": -0.093
+    },
+    {
+      "judge": "Gemini pro-low judge",
+      "is_self_judge": false,
+      "V2_risk": 0.3124,
+      "V3_risk": 0.1848,
+      "V3_minus_V2": -0.1276
+    },
+    {
+      "judge": "GPT judge",
+      "is_self_judge": false,
+      "V2_risk": 0.3792,
+      "V3_risk": 0.254,
+      "V3_minus_V2": -0.1252
+    },
+    {
+      "judge": "Qwen judge",
+      "is_self_judge": false,
+      "V2_risk": 0.311,
+      "V3_risk": 0.2296,
+      "V3_minus_V2": -0.0814
+    },
+    {
+      "judge": "Llama judge",
+      "is_self_judge": true,
+      "V2_risk": 0.657,
+      "V3_risk": 0.68,
+      "V3_minus_V2": 0.023
+    }
+  ],
+  "holm_bonferroni_m10": [
+    {
+      "test": "Pooled V2 vs V0 (Exact McNemar, 20 vs 0)",
+      "p_raw": 1.9073486328125e-06,
+      "p_holm": 1.9073486328125e-05,
+      "sig_005": true,
+      "sig_001": true
+    },
+    {
+      "test": "Llama 3.1 8B V2 vs V0 (Exact McNemar, 16 vs 0)",
+      "p_raw": 3.0517578125e-05,
+      "p_holm": 0.000274658203125,
+      "sig_005": true,
+      "sig_001": true
+    },
+    {
+      "test": "Intra-organizational opacity gradient (14/22 vs 25%)",
+      "p_raw": 0.00014395135269751336,
+      "p_holm": 0.0011516108215801069,
+      "sig_005": true,
+      "sig_001": false
+    },
+    {
+      "test": "Ex-ante R1 algebraic alignment gain (164/200 vs 160/240)",
+      "p_raw": 0.0003180480761224273,
+      "p_holm": 0.002226336532856991,
+      "sig_005": true,
+      "sig_001": false
+    },
+    {
+      "test": "Llama 3.1 8B Guardrail Paradox V2 vs V3 (Fisher exact, 16/174 vs 5/174)",
+      "p_raw": 0.02227045879822067,
+      "p_holm": 0.133622752789324,
+      "sig_005": false,
+      "sig_001": false
+    },
+    {
+      "test": "DeepSeek Chat V3 vs V0 (Exact McNemar, 6 vs 0)",
+      "p_raw": 0.03125,
+      "p_holm": 0.15625,
+      "sig_005": false,
+      "sig_001": false
+    },
+    {
+      "test": "Llama 3.1 8B V1 vs V0 (Exact McNemar, 5 vs 0)",
+      "p_raw": 0.0625,
+      "p_holm": 0.25,
+      "sig_005": false,
+      "sig_001": false
+    },
+    {
+      "test": "Llama 3.1 8B V3 vs V0 (Exact McNemar, 5 vs 0)",
+      "p_raw": 0.0625,
+      "p_holm": 0.25,
+      "sig_005": false,
+      "sig_001": false
+    },
+    {
+      "test": "DeepSeek Chat V2 vs V0 (Exact McNemar, 3 vs 0)",
+      "p_raw": 0.25,
+      "p_holm": 0.5,
+      "sig_005": false,
+      "sig_001": false
+    },
+    {
+      "test": "DeepSeek Chat V1 vs V0 (Exact McNemar, 2 vs 0)",
+      "p_raw": 0.5,
+      "p_holm": 0.5,
+      "sig_005": false,
+      "sig_001": false
+    }
+  ],
+  "ppi_frontier_judge_calibration": {
+    "DeepSeek judge": {
+      "llama_v2_minus_v3": 0.093,
+      "calibration_mad_n300": 0.097,
+      "ppi_conservative_se": 0.0329,
+      "ppi_95_ci_v2_minus_v3": [
+        0.0285,
+        0.1575
+      ],
+      "strictly_positive_after_ppi": true
+    },
+    "Gemini pro-low judge": {
+      "llama_v2_minus_v3": 0.1276,
+      "calibration_mad_n300": 0.02,
+      "ppi_conservative_se": 0.0251,
+      "ppi_95_ci_v2_minus_v3": [
+        0.0784,
+        0.1768
+      ],
+      "strictly_positive_after_ppi": true
+    },
+    "GPT judge": {
+      "llama_v2_minus_v3": 0.1252,
+      "calibration_mad_n300": 0.033,
+      "ppi_conservative_se": 0.0267,
+      "ppi_95_ci_v2_minus_v3": [
+        0.0729,
+        0.1775
+      ],
+      "strictly_positive_after_ppi": true
+    }
+  }
+}

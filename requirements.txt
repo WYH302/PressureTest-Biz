@@ -1,0 +1,12 @@
+# PressureTest-Biz Python Dependencies
+# Core corpus synthesis, validation, exact-anchor parsing, unit tests, and the offline
+# results viewer require ONLY the Python 3.10+ standard library (zero external packages).
+#
+# Optional packages below enable extended statistical analyses, custom plotting, and
+# editable figure export (verified in Python 3.11):
+numpy>=1.26,<3
+scipy>=1.12,<2
+matplotlib>=3.8,<4
+Pillow>=10.0
+python-pptx>=0.6.23
+pytest>=8,<10

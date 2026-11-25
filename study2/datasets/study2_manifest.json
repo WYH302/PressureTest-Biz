@@ -1,0 +1,22 @@
+{
+  "scenarios": 240,
+  "ab_balance": {
+    "A": 120,
+    "B": 120
+  },
+  "arms": [
+    "M0_neutral_control",
+    "ML_load_only",
+    "MS_scarcity_only",
+    "MH_leadership_only",
+    "MD_detectability_only",
+    "MLS_load_x_scarcity",
+    "MB_bundled_pressure",
+    "MR_constraint_regrounding"
+  ],
+  "modifier_word_count": 48,
+  "study2_8arm_rows": 1920,
+  "study2_core5_rows": 1200,
+  "eval_awareness_rows": 480,
+  "zero_meta_label_leaks_in_clean_pack": true
+}
