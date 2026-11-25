@@ -136,7 +136,7 @@ If you use **PressureTest-Biz**, our sanitized 8-arm executive memo suite, two-s
 @article{wu2026pressuretestbiz,
   title   = {PressureTest-Biz: Counterfactual Auditing, Mechanistic Decomposition, and Representation-Level Mitigation of Operational Normative Drift in LLMs},
   author  = {Wu, Yonghao and Wu, Jiayang and He, Sirui and Liu, Xixue and Liu, Chang and Filaretov, Vladimir and Yukhimets, Dmitry},
-  journal = {IEEE Transactions (Manuscript Under Review)},
+  journal = {IEEE Transactions on Artificial Intelligence (Manuscript Under Review)},
   year    = {2026},
   url     = {https://github.com/WYH302/PressureTest-Biz}
 }
