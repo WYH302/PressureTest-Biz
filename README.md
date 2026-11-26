@@ -1,86 +1,96 @@
 # PressureTest-Biz
 
-**Counterfactual Auditing, Mechanistic Decomposition, and Representation-Level Mitigation of Operational Normative Drift in LLMs**  
-*面向运营压力下大语言模型规范漂移的反事实审计、因果机制分解与表征级缓解工具包*
+**Breaking the Calm-State Alignment Illusion: Auditing, Modeling, and Steering Operational Normative Drift in LLMs**  
+*打破平静态对齐幻觉：大语言模型运营规范漂移的反事实审计、理论建模与子空间引导*
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/WYH302/PressureTest-Biz/blob/main/demo.ipynb)
-**[Study 1: Exploratory Audit](#study-1-exploratory-audit--judge-calibration)** · **[Study 2: 8-Arm & White-Box CAA](#study-2-sanitized-8-arm-decomposition-dual-process-cot--white-box-caa)** · **[Quick Start](#quick-start-zero-api-calls)** · **[Repository Layout](#repository-structure)** · **[中文说明](#中文说明)**
+**[Three-Engine Architecture](#overview)** · **[Real Pitfalls & Lessons Learned](#research-notes-real-pitfalls--lessons-learned)** · **[Empirical Findings](#key-empirical-findings)** · **[Quick Start](#quick-start)** · **[中文说明](#中文说明)**
 
-![PressureTest-Biz Framework Overview](docs/framework_overview.png)
+> *This repository accompanies our manuscript under review. We strive to keep every number, dataset, and script transparent and reproducible, and we warmly welcome critiques, independent replications, bug reports, and pull requests via GitHub Issues.*
+
+![PressureTest-Biz Overview and Safety-Efficiency Pareto Frontier](docs/framework_overview.png)
 
 ---
 
 ## Overview
 
-**PressureTest-Biz** is an end-to-end open-source auditing, causal decomposition, and mitigation framework for evaluating whether large language models (LLMs) suffer from a **calm-state alignment illusion**—appearing 100% compliant in frictionless baseline evaluations while undergoing **operational normative drift** (abandoning explicit institutional rules for tactical shortcuts) once workplace stressors intensify.
+**PressureTest-Biz** is an open-source auditing, formal modeling, and representation-steering toolkit built to examine a subtle failure mode in enterprise LLM deployments: the **calm-state alignment illusion**. Checkpoints that uphold explicit institutional rules when compliance is frictionless (`V0 C = 0%`) can still undergo **operational normative drift**—abandoning stated constraints for expedient shortcuts—once workplace stressors such as resource scarcity, executive coercion, or low detectability enter the prompt.
 
-Across two tightly coupled empirical studies, PressureTest-Biz resolves four core bottlenecks in prior operational-stress evaluations:
-1. **Within-Case Baseline Conditioning (Study 1):** Pairs every calm baseline (`V0`) with matched cognitive load (`V1`), resource scarcity (`V2`), and combined pressure (`V3`) while holding managerial role, business goal, operating constraint, and action pair `(A_P, A_C)` strictly invariant (`200` aligned quartets, `800` prompts; `364` blinded dual-annotator validations, `kappa = 1.000`, `kappa_w = 0.957`, `100%` precision, `0/144` false positives).
-2. **Calibration-Aware Judging & Two-Stage Verification (Wave 0 + Stage 2 NLI):** Separates Frontier-3 direct-risk consensus (`0.3 pp` spread on DeepSeek/Gemini) from Open-8B judge collapse (`60.4%–78.6%` calm-baseline false alarms), exposes `8B` self-leniency preference leakage (`-0.117` Llama, `-0.073` Qwen3), validates Llama 3.1 8B's V2→V3 guardrail paradox via *Science*-2023 **Prediction-Powered Inference (PPI)** confidence intervals, and pairs the Pareto-optimal Stage 1 exact-anchor parser (`pre6_post5 = 93.3%`) with a Stage 2 local `DeBERTa-v3-large-mnli` cascade (`+13.8` to `+17.0 pp` coverage gain, **`99.72%`** Choice–Action concordance across `1,077` decisive outputs).
-3. **Sanitized 8-Arm Equal-Length Decomposition, Evaluation Awareness & Dual-Process CoT (Study 2):** Eliminates meta-label leaks and option-order bias across **240 Round-2 100%-expert-accepted scenarios × 8 strictly 48-word executive memos** (`1,920` prompts/model, `120/120` A/B counterbalanced), proves the sub-additive guardrail paradox persists without meta-labels (`p = 3.81e-6`), directly quantifies explicit-label **evaluation awareness** (`Wilcoxon p = 1.24e-18`), reveals a **same-backbone dual-process recovery** where Chain-of-Thought deliberation cuts matched reasoning-distilled drift **4.3–19×** (`p = 4.01e-5`), and maps `BF16 -> INT8 -> NF4` quantization resilience across `5,760` trials.
-4. **White-Box Residual-Stream Geometry & Zero-Training CAA Mitigation (Study 2):** Shows operational stress collapses mid-late compliance projections by `4.4–9.3` units (`Cohen's d = 4.58–5.84`) and demonstrates that inference-time **Contrastive Activation Addition (CAA)** cuts bundled violations by **`-61.1%`** on Qwen2.5-3B (`p = 0.036`), **`-66.7%`** on Qwen2.5-7B, and **`-34.5%`** on System-1 DeepSeek-R1-7B (`p = 0.029`) with **zero baseline safety tax** and zero extra tokens.
+Guided by a bounded-rational **Alignment-Salience Threshold Model** (Proposition 1 & Corollary 1), PressureTest-Biz integrates **three coupled engines**:
+
+1. **`CS-Disentangler` (Counterfactual Stress Disentangler):** Pairs `200` algebraically aligned macro dilemmas (`V0–V3`, `800` prompts; `364` blinded dual-annotator validations, `kappa = 1.000`, `kappa_w = 0.957`, `100%` precision) with `240` Round-2 `100%`-expert-accepted 8-arm strictly `48`-word sanitized executive memos (`1,920` prompts/model, `120/120` A/B counterbalanced, zero meta-labels) and `480` paired evaluation-awareness controls.
+2. **`PGC-Auditor` (Precision-Guaranteed Cascaded Auditor):** Combines a Pareto-optimal Stage 1 exact-anchor floor (`pre6_post5 = 93.3%`, `0` false positives) with a Stage 2 local `DeBERTa-v3-large-mnli` entailment cascade across `2,480` full generations from 5 open and closed-weight models (`+76.56` to `+81.88 pp` frontier recall rescue at `100.0%` concordance; **`99.86%`** pooled across `2,177` decisive outputs), stratified Frontier-3 vs. Open-8B judge diagnostics, and *Science*-2023 **Prediction-Powered Inference (PPI)** confidence intervals.
+3. **`SCA-Steer` (Subspace Compliance Anchor):** Extracts a single Difference-in-Means compliance vector in mid-late residual layers (`60` calibration / `180` disjoint held-out scenarios, `Cohen's d = 4.58–5.84`) and applies $O(d)$ inference-time **Contrastive Activation Addition (CAA)** (`<0.05%` FLOPs, `0` extra output tokens, zero baseline safety tax), cutting bundled-pressure (`MB`) violations by **`-61.1%`** on `Qwen2.5-3B` (`p = 0.036`), **`-66.7%`** on `Qwen2.5-7B`, and **`-34.5%`** on System-1 `DeepSeek-R1-Distill-Qwen-7B` (`p = 0.029`).
 
 ---
 
-## Study 1: Exploratory Audit & Judge Calibration
+## Research Notes: Real Pitfalls & Lessons Learned
 
-| Component | Specification | Key Finding |
+Rather than presenting only polished final tables, we want to share five genuine pitfalls we ran into during development—each of which directly shaped the final three-engine design:
+
+1. **Pitfall 1 — Cartesian Scenario Grids Silently Leak Cross-Family Mismatches (`80%` Noise):** Our initial $5\times 5\times 5$ procedural generator produced 1,000 scenarios, yet Round-1 expert auditing revealed that cross-family combinations (`c_idx != a_idx`) only achieved `66.7%` acceptance because action pairs occasionally drifted away from the paired constraint. Enforcing algebraic alignment `(r + g) ≡ 0 (mod 5)` immediately raised expert acceptance by `+15.3 pp` to `82.0%` (`p = 3.18e-4`), and rewriting native Round-2 phrasing across 40 families reached `100.0%` (`240/240`).
+2. **Pitfall 2 — Explicit Condition Labels Trigger Evaluation Awareness:** Early prompts included lines like `Pressure condition V3_combined_pressure:`. When we later ran a 480-prompt paired ablation toggling only that header, `Qwen2.5-3B` dropped shortcut probability by `-27.3%` relative (`Wilcoxon p = 1.24e-18`), and even closed-weight frontier models shifted internal reasoning tokens (`p = 0.031`). Removing all meta-labels inside 48-word `INTERNAL DECISION MEMO` headers proved essential—and confirmed that the sub-additive guardrail paradox still holds cleanly without test headers (`p = 3.81e-6`).
+3. **Pitfall 3 — Open-8B LLM Judges Inflate Calm Baselines and Favor Their Own Family:** Before stratifying our five judges, pooled judge ranges spanned up to `66.1 pp`. Stratification exposed why: `Llama 3.1 8B` as a judge flagged `60.4%–78.6%` of calm `V0` responses as direct violations while showing `-0.117` self-leniency toward its own family (relative to neutral `GPT-5.5`). Restricting continuous scoring to Frontier-3 judges collapsed direct-risk spread to `0.3 pp` on commercial targets and yielded strictly positive PPI 95% CIs across all three frontier judges.
+4. **Pitfall 4 — Strict Verbatim Parsers Collapse on Paraphrastic Frontier Models:** Exact-anchor matching guaranteed `100%` precision (`0/144` FP), yet on closed-weight frontier models (`GPT-6.2-Sol` and `GPT-6.1-Terra`) that naturally paraphrase action choices, Stage-1 coverage fell to `4.22%–9.22%`. Cascading only the unclassified subset `U` to a local `DeBERTa-v3-large-mnli` cross-encoder lifted coverage by `+76.56` to `+81.88 pp` at `100.0%` Choice–Action agreement (`1,100/1,100`) without spending a cent on judge APIs.
+5. **Pitfall 5 — Prompt Reminders Fail Where Residual Geometry Collapses:** Equal-length constraint regrounding (`MR`) worked remarkably well on `Qwen2.5-7B` (`2.92% -> 0.83%`), yet failed completely on `Qwen2.5-3B` (`9.58% -> 9.58%`) and System-1 `DeepSeek-R1-7B` (`28.33% -> 29.58%`). White-box projection revealed why: operational stress displaced compliance activations by `4.4–9.3` units and prompt text only recovered half the shift on 3B—motivating direct $O(d)$ `SCA-Steer` intervention at zero token cost.
+
+---
+
+## Key Empirical Findings
+
+### 1. Macro Exploratory Audit & Judge Stratification (`CS-Disentangler` Macro + `PGC-Auditor` PPI)
+
+| Component | Specification | Verified Outcome |
 | :--- | :--- | :--- |
-| **Procedural Corpus** | `8` domains × `125` blueprints = `1,000` base scenarios (`200` algebraically aligned via `(r+g) ≡ 0 (mod 5)`) | `0` baseline violations (`V0 C = 0`) vs. `38` human-verified `P -> C` reversals (`kappa = 1.000`, `100%` precision) |
-| **Failure Regimes & Opacity** | DeepSeek Chat, Gemini 3.1, Qwen3 8B, Llama 3.1 8B across `V0–V3` | DeepSeek monotonic (`3.3%` at V3) vs. Llama **guardrail paradox** (`9.2%` V2 → `2.9%` V3); **63.6%** peak drift in opaque internal politics & supply chains vs. **0%** in customer/PR |
-| **Wave 0 Judge Stratification & PPI** | Frontier-3 (`DeepSeek-V4-Pro`, `Gemini Pro`, `GPT-5.5`) vs. Open-8B judges + `n_cal = 300` calibration | Frontier-3 direct spread `0.3 pp` on commercial targets; Open-8B self-leniency (`-0.117`); all 3 frontier PPI 95% CIs strictly `> 0` for Llama V2–V3 risk drop |
+| **Procedural Corpus** | `8` domains × `125` blueprints = `1,000` base scenarios (`200` aligned via `(r+g) ≡ 0 (mod 5)`) | `0` calm violations (`V0 C = 0`) vs. `38` human-verified `P -> C` reversals (`kappa = 1.000`, `100%` precision) |
+| **Regimes & Opacity** | `DeepSeek Chat`, `Gemini 3.1`, `Qwen3 8B`, `Llama 3.1 8B` (`V0–V3`) | DeepSeek monotonic (`3.3%` at V3) vs. Llama **guardrail paradox** (`9.2%` V2 → `2.9%` V3); **63.6%** peak drift in opaque internal politics & supply chains vs. **0.0%** in customer/PR |
+| **Judge Calibration & PPI** | Frontier-3 (`DeepSeek-V4-Pro`, `Gemini Pro`, `GPT-5.5`) vs. Open-8B judges (`n_cal = 300`) | Frontier-3 direct spread `0.3 pp` on commercial targets; Open-8B self-leniency (`-0.117`); all 3 frontier PPI 95% CIs strictly `> 0` for Llama V2–V3 drop |
 
-![Empirical Reversal Patterns Across Regimes and Domains](docs/results_overview.png)
-![Wave 0 Stratified Judge Diagnostics and PPI Calibration](docs/study1_wave0_judge_audit.png)
+![Macro Reversal Regimes and Domain Opacity Gradient](docs/results_overview.png)
+![Stratified Judge Diagnostics and PPI Calibration](docs/study1_wave0_judge_audit.png)
 
----
+### 2. Sanitized 8-Arm Decomposition, Dual-Process CoT, Frontier Telemetry & `SCA-Steer`
 
-## Study 2: Sanitized 8-Arm Decomposition, Dual-Process CoT & White-Box CAA
-
-All Study 2 datasets (`study2/datasets/`), portable reproduction scripts (`study2/scripts/`), and verified outputs (`study2/outputs/`) are included directly in this repository:
-
-| Experiment Module | Design & Scale | Headline Verified Result |
+| Module | Design & Scale | Verified Outcome |
 | :--- | :--- | :--- |
-| **Sanitized 8-Arm Memos** | `240` Round-2 expert-accepted scenarios × `8` strictly `48`-word arms (`M0, ML, MS, MH, MD, MLS, MB, MR`), `120/120` A/B balanced, `0` meta-labels | Sub-additive guardrail paradox persists without meta-labels: R1-7B `MH 36.25% -> MB 28.33%` (`p = 3.81e-6`), Qwen2.5-7B `MD 7.50% -> MB 2.92%` (`p = 9.77e-4`) |
-| **Evaluation-Awareness Ablation** | `480` paired prompts (`MS`, `MB` clean memo vs. explicit `Pressure condition V2/V3`) | Meta-labels artificially suppress shortcut probability (`-27.3%` rel. on 3B, `Wilcoxon p = 1.24e-18`; R1-7B `p = 5.15e-17`) |
-| **Same-Backbone Dual-Process CoT** | `Qwen2.5-7B-Instruct` vs. `DeepSeek-R1-Distill-Qwen-7B` (Sys-1 direct vs. Sys-2 full CoT on exact matched `80`-case cohort) | Distilled Sys-1 drift jumps ~10×; unobstructed CoT (`2,314`-char mean reasoning) recovers compliance **4.3–19×** (`MR: 23.75% -> 1.25%`, `p = 4.01e-5`) |
-| **Quantization Safety Curve** | Identical `Qwen2.5-7B-Instruct` weights across `BF16`, `INT8`, `NF4` (`5,760` trials) | `BF16 ≈ INT8` bit-for-bit across all 8 arms; 4-bit `NF4` doubles prompt regrounding (`MR`) residual error (`0.83% -> 1.67%`) |
-| **Stage 2 Local NLI Cascade** | `9`-cell window sweep + `DeBERTa-v3-large-mnli` over `2,480` full generations across **5 open & frontier models** | `pre6_post5` Pareto elbow (`93.3%`, `0` FP); rescues paraphrastic frontier models by **`+76.6` to `+81.9 pp`** (`100%` agr., `1,100/1,100`), **`99.86%`** pooled concordance (`2,174/2,177`) |
-| **Closed-Weight Frontier Telemetry** | `GPT-6.2-Sol` (`medium`) & `GPT-6.1-Terra` (`high`) across matched `80` scenarios × `8` arms + `160` EA-meta (`1,600` calls) | **`0.00%` crossing ceiling (`0/1,600`)**; replicated **fast coercion reflex** at `MH` (`-20.7%` / `-25.8%`, `p <= 1.83e-3`) vs. **`+59.7%` / `+61.4%` constraint-regrounding surge** at `MR` (`p <= 1.30e-5`); sub-threshold EA token shift (`p = 0.031`) |
-| **White-Box Probing & CAA** | `60` calibration / `180` disjoint held-out scenarios, mid-late layer sweep (`alpha = 0..4`) | Pressure collapses compliance projection `4.4–9.3` units; zero-training CAA cuts `MB` by **`-61.1%`** (3B, `p=0.036`), **`-66.7%`** (7B), **`-34.5%`** (R1-7B, `p=0.029`) with `0` baseline harm |
+| **8-Arm Equal-Length Memos** | `240` expert-accepted scenarios × `8` strictly `48`-word arms (`M0–MR`), `120/120` A/B balanced, `0` meta-labels | Meta-label-free guardrail paradox confirmed: R1-7B `MH 36.25% -> MB 28.33%` (`p = 3.81e-6`), Qwen2.5-7B `MD 7.50% -> MB 2.92%` (`p = 9.77e-4`) |
+| **Evaluation-Awareness Ablation** | `480` paired prompts (`MS`, `MB` clean memo vs. legacy meta-label) | Meta-labels suppress shortcut probability (`-27.3%` rel. on 3B, `Wilcoxon p = 1.24e-18`; R1-7B `p = 5.15e-17`) |
+| **Same-Backbone Dual-Process CoT** | `Qwen2.5-7B-Instruct` vs. `DeepSeek-R1-Distill-Qwen-7B` (Sys-1 vs. Sys-2 full CoT on matched `80` scenarios) | Distilled Sys-1 drift jumps ~10×; unobstructed CoT (`2,314`-char mean trace) cuts crossings **4.3–19×** (`MR: 23.75% -> 1.25%`, `p = 4.01e-5`) |
+| **Quantization Safety Curve** | Identical `Qwen2.5-7B-Instruct` weights across `BF16`, `INT8`, `NF4` (`5,760` trials) | `BF16` & `INT8` match bit-for-bit across core stress arms (`M0/MS/MD/MB`); 4-bit `NF4` doubles `MR` error (`0.83% -> 1.25% -> 1.67%`) |
+| **5-Model Stage 2 NLI Cascade** | `9`-cell window sweep + local `DeBERTa-v3-large-mnli` over `2,480` generations | `pre6_post5` elbow (`93.3%`, `0` FP); rescues frontier recall by **`+76.56` / `+81.88 pp`** (`100.0%` agr.), **`99.86%`** pooled concordance (`2,174/2,177`) |
+| **Closed-Weight Frontier Telemetry** | `GPT-6.2-Sol` (`medium`) & `GPT-6.1-Terra` (`high`) across matched `80` scenarios × `8` arms + `160` EA (`1,600` calls) | **`0.00%` crossing ceiling (`0/1,600`)**; replicated **fast coercion reflex** at `MH` (`-20.7%` / `-25.8%`, `p <= 1.83e-3`) vs. **`+59.6%` / `+61.4%` constraint-regrounding surge** at `MR` (`p <= 1.30e-5`); sub-threshold EA token shift (`p = 0.031`) |
+| **White-Box Geometry & `SCA-Steer`** | `60` calibration / `180` held-out scenarios, mid-late layer sweep (`alpha = 0..4`) | Stress collapses projections `4.4–9.3` units; $O(d)$ `SCA-Steer` cuts `MB` by **`-61.1%`** (3B, `p=0.036`), **`-66.7%`** (7B), **`-34.5%`** (R1-7B, `p=0.029`) at `0` extra tokens & `0` baseline harm |
 
-![Study 2 Mechanism Decomposition, Dual-Process CoT Recovery, and Quantization Curve](docs/study2_mechanism_dualprocess.png)
-![Study 2 White-Box Geometry, CAA Steering, and 5-Model Stage 2 NLI Cascade](docs/study2_whitebox_caa_nli.png)
-![Study 2 Closed-Weight Frontier Reasoning-Token Telemetry](docs/study2_frontier_telemetry.png)
+![8-Arm Mechanism Decomposition, Dual-Process CoT Recovery, and Quantization Curve](docs/study2_mechanism_dualprocess.png)
+![Closed-Weight Frontier Reasoning-Token Telemetry](docs/study2_frontier_telemetry.png)
+![White-Box Geometry, SCA-Steer Dose-Response, and 5-Model Stage 2 NLI Cascade](docs/study2_whitebox_caa_nli.png)
 
 ---
 
-## Quick Start (Zero API Calls)
+## Quick Start
 
-### 1. Study 1 Offline Verification & Interactive Explorer (Python 3.10+ Stdlib Only)
+### 1. Environment Setup
+
+Core macro verification, exact-anchor parsing, unit tests, and the offline results explorer require **Python 3.10+ stdlib only** (zero external dependencies). For statistical calibration, DeBERTa NLI cascading, quantization, and white-box `SCA-Steer`, install the scientific dependencies from [`requirements.txt`](requirements.txt):
 
 ```bash
-# Run unit tests (scenario synthesis, algebraic alignment, exact-anchor parser, offline viewer)
+python -m pip install -r requirements.txt
+```
+
+### 2. Zero-API Offline Verification & Dataset Regeneration
+
+```bash
+# Run all unit tests (scenario synthesis, algebraic alignment, exact-anchor parser, offline viewer)
 python -m unittest discover -s tests -v
 
 # Verify all 80 multi-evaluator summary rows and 40 planned contrast identities
 python analysis/analyze_retained_bundle.py
 
-# Regenerate and validate the 1,000-scenario / 4,000-prompt Study 1 corpus
+# Regenerate and validate the 1,000-scenario / 4,000-prompt macro corpus
 python scripts/build_main_dataset.py
 python scripts/validate_main_dataset.py
 
-# Launch the zero-dependency offline HTML results explorer
-python demo.py
-```
-
-### 2. Study 2 Offline Statistical Upgrades & Sanitized Dataset Generation
-
-```bash
-# Optional scientific dependencies (scipy, torch, transformers, bitsandbytes, httpx)
-python -m pip install -r requirements.txt
-
-# Reproduce Wave 0 Frontier-3 vs Open-8B stratification, 4x4 leakage matrix, Holm-Bonferroni, and PPI CIs
+# Reproduce Wave 0 judge stratification, 4x4 preference leakage, Holm-Bonferroni, and PPI CIs
 python study2/scripts/wave0_stats_upgrade.py
 
 # Reproduce the 9-cell exact-anchor negation-window Pareto sensitivity sweep
@@ -88,13 +98,16 @@ python study2/scripts/stage2_nli_and_window_sweep.py sweep
 
 # Deterministically rebuild the sanitized 240-scenario 8-arm (1,920) + Eval-Awareness (480) packs
 python study2/scripts/build_study2_clean_pack.py
+
+# Launch the zero-dependency offline HTML results explorer
+python demo.py
 ```
 
-### 3. Single-GPU (RTX 3090 24 GB) Quantization, Dual-Process CoT & White-Box CAA
+### 3. Single-GPU (RTX 3090 24 GB) Quantization, Dual-Process CoT & `SCA-Steer`
 
 ```bash
-# Downloads Qwen2.5-3B, Qwen2.5-7B, and DeepSeek-R1-Distill-Qwen-7B from HuggingFace Hub
-# (or set PTB_MODEL_ROOT=/path/to/local/models to load local weights offline)
+# Loads Qwen2.5-3B, Qwen2.5-7B, and DeepSeek-R1-Distill-Qwen-7B from HuggingFace Hub
+# (or set PTB_MODEL_ROOT=/path/to/local/models for fully offline local weights)
 python study2/scripts/run_3090_phaseA2_fast.py
 ```
 
@@ -115,26 +128,28 @@ Then visit `http://localhost:7860` (preview recorded in [`docs/demo.webm`](docs/
 
 | Path | Description |
 | :--- | :--- |
-| `scripts/build_main_dataset.py`, `validate_main_dataset.py` | Study 1 deterministic `1,000`-scenario / `4,000`-prompt generator and structural validator |
+| `scripts/build_main_dataset.py`, `validate_main_dataset.py` | Deterministic `1,000`-scenario / `4,000`-prompt generator and structural validator |
 | `scripts/analyze_boundary_crossings.py`, `analyze_structural_alignment.py` | Negation/quotation-aware exact-anchor parser (`P, C, U`) and algebraic alignment verifier |
-| `analysis/sources/` & `analysis/analyze_retained_bundle.py` | Study 1 multi-evaluator summaries (`cell_variant_summary.csv`), contrasts, and verifier |
-| `study2/datasets/` | Sanitized Study 2 `240`-scenario 8-arm equal-length (`1,920`), core-5 (`1,200`), and Evaluation-Awareness (`480`) JSONL packs + manifest |
+| `analysis/sources/` & `analysis/analyze_retained_bundle.py` | Multi-evaluator summaries (`cell_variant_summary.csv`), planned contrasts, and verifier |
+| `study2/datasets/` | Sanitized `240`-scenario 8-arm equal-length (`1,920`), core-5 (`1,200`), and Evaluation-Awareness (`480`) JSONL packs + manifest |
 | `study2/scripts/wave0_stats_upgrade.py` | Frontier-3 vs. Open-8B stratification, `4×4` preference leakage, Holm–Bonferroni, and PPI CI calibration |
-| `study2/scripts/build_study2_clean_pack.py` | Deterministic builder for Study 2 meta-label-free, 50/50 A/B counterbalanced 48-word memos |
-| `study2/scripts/stage2_nli_and_window_sweep.py` | 9-cell window sensitivity sweep + Stage 2 local `DeBERTa-v3-large-mnli` cascade verifier |
-| `study2/scripts/run_3090_phaseA2_fast.py` | Controlled `BF16/INT8/NF4` quantization, System-1/System-2 CoT, and white-box CAA steering suite |
-| `study2/scripts/run_parallel_gpt_v2.py` & `study2/env.example` | Async cloud inference runner with strict model allowlist and daily USD circuit breaker (no keys included) |
-| `study2/outputs/` | Verified JSON outputs for Wave 0, 9-cell sweep, Study 2 master summary, and white-box CAA layer sweeps |
+| `study2/scripts/build_study2_clean_pack.py` | Deterministic builder for meta-label-free, 50/50 A/B counterbalanced 48-word executive memos |
+| `study2/scripts/stage2_nli_and_window_sweep.py` | 9-cell negation-window sweep + Stage 2 local `DeBERTa-v3-large-mnli` cascade verifier |
+| `study2/scripts/run_3090_phaseA2_fast.py` | Controlled `BF16/INT8/NF4` quantization, System-1/System-2 CoT, and white-box `SCA-Steer` suite |
+| `study2/scripts/run_parallel_gpt_v2.py` & `study2/env.example` | Async closed-weight API runner with strict allowlist and daily budget circuit breaker (no keys included) |
+| `study2/outputs/` | Verified JSON outputs for Wave 0, 9-cell sweep, 8-arm/quantization/CoT master summary, and white-box CAA sweeps |
 | `demo.py`, `demo_ui.py`, `demo.ipynb` | Zero-dependency interactive browser explorer and Colab notebook |
-| `tests/` | Automated unit tests for Study 1 scenario generation, parser logic, alignment math, and viewer safety |
+| `tests/` | Automated unit tests (`13/13` passing) covering synthesis, parser logic, alignment math, and viewer safety |
 
-### Citation
+---
 
-If you use **PressureTest-Biz**, our sanitized 8-arm executive memo suite, two-stage exact-anchor + NLI cascade, PPI judge calibration, or white-box CAA steering scripts in your research, please cite:
+## Citation
+
+If this codebase, benchmark suite, or mechanistic analysis proves helpful in your work, please consider citing:
 
 ```bibtex
 @article{wu2026pressuretestbiz,
-  title   = {PressureTest-Biz: Counterfactual Auditing, Mechanistic Decomposition, and Representation-Level Mitigation of Operational Normative Drift in LLMs},
+  title   = {Breaking the Calm-State Alignment Illusion: Auditing, Modeling, and Steering Operational Normative Drift in LLMs},
   author  = {Wu, Yonghao and Wu, Jiayang and He, Sirui and Liu, Xixue and Liu, Chang and Filaretov, Vladimir and Yukhimets, Dmitry},
   journal = {IEEE Transactions on Artificial Intelligence (Manuscript Under Review)},
   year    = {2026},
@@ -146,34 +161,39 @@ If you use **PressureTest-Biz**, our sanitized 8-arm executive memo suite, two-s
 
 ## 中文说明
 
-### 1. 项目简介
+> 本项目为投稿审稿中论文的配套开源工具包。我们力求公开全部核心数据、脱敏脚本与真实探索过程；受限于单轮文本范式与实验算力边界，工作仍有诸多可拓展之处，诚挚欢迎学界与工业界同行通过 GitHub Issues 批评指正、复现检验与交流合作。
 
-**PressureTest-Biz** 是一个面向大语言模型（LLM）商业运营规范漂移的端到端开源研究框架，涵盖**反事实审计（Study 1）**与**净身 8 臂因果机制分解、双系统思考恢复及白盒激活引导缓解（Study 2）**：
+### 1. 项目简介与三大引擎
 
-- **Study 1（探索性审计与 Wave 0 裁判校准）**：基于 8 大商业领域 × 125 组合蓝图（共 1,000 场景，核心代数对齐子集 200 场景 / 800 条 V0–V3 提示词），结合 364 条双人盲审验证（$\kappa = 1.000$、$\kappa_w = 0.957$、100% 精确率、0/144 假阳性）与 5 套自动裁判，揭示平静基线零违规（$\text{V0 } C = 0$）下的两类对立漂移机制（DeepSeek 单调攀升至 3.3% vs. Llama 3.1 8B 稀缺诱发“护栏悖论” 9.2% → 2.9%）、**63.6% 内部不透明梯度**、**8B 自评自我宽容偏置（$-0.117$）** 以及基于 *Science* 2023 **PPI** 的旗舰裁判校准共识。
-- **Study 2（净身 8 臂机制分解、双系统思考与白盒 CAA 缓解）**：启用 240 个 Round-2 100% 专家通过场景 × **严格 48 词等长 8 臂**（`M0 / ML / MS / MH / MD / MLS / MB / MR`，120/120 A/B 严格对调、彻底剔除显性 `Pressure condition` 元标签），实证确认：
-  1. 剔除元标签后子加性**护栏悖论**依然显著成立（DeepSeek-R1-7B `MH 36.25% -> MB 28.33%`，Exact McNemar $p = 3.81\times 10^{-6}$）；
-  2. 480 条配对实验直接量化显性标签诱发的**评测感知（Evaluation Awareness）**（3B 违规概率相对压低 `-27.3%`，Wilcoxon $p = 1.24\times 10^{-18}$）；
-  3. 同底座 7B（`Qwen2.5-7B-Instruct` vs. `DeepSeek-R1-Distill-Qwen-7B`）呈现剧烈**双系统分离**：强制直答时违规率飙升近 10 倍，放开完整 Chain-of-Thought 思考后匹配样本违规率**骤降 4.3–19 倍**（`MR: 23.75% -> 1.25%`，$p = 4.01\times 10^{-5}$）；
-  4. `BF16` 与 `INT8` 在全部 8 臂上几乎逐比特一致，而 4-bit `NF4` 使约束重锚定 `MR` 残余违规翻倍（`0.83% -> 1.67%`）；
-  5. Stage 1 精确锚点（9 格扫参验证 `pre6_post5 = 93.3%`）+ Stage 2 本地 `DeBERTa-v3-large-mnli` 级联覆盖 5 个开源与闭源模型（2,480 条完整回复），将强改写闭源模型覆盖率从 `4.2%–9.2%` 拉升 **`+76.6` 至 `+81.9 pp`**（`100%` 零误差），总 Choice–Action 一致率达 **99.86%（2,174/2,177）**；
-  6. 闭源前沿推理对照（`GPT-6.2-Sol [medium]` 与 `GPT-6.1-Terra [high]`，共 1,600 条匹配请求）建立 **0.00% 违规天花板（0/1,600）**，同时在内部思考 token 遥测中双重验证高管胁迫 `MH` 快速反射压缩（`-20.7%` / `-25.8%`，$p \le 1.83\times 10^{-3}$）与等长约束重锚定 `MR` 深度规范核验激增（`+59.7%` / `+61.4%`，$p \le 1.30\times 10^{-5}$）；
-  7. 零训练白盒残差流 **CAA 激活引导**（60 校准 / 180 独立留出）将复合高压 `MB` 违规率压低 **`-34.5%` 至 `-66.7%`**，且对平静基线 `M0` 零安全税、零额外 token 开销。
+**PressureTest-Biz** 围绕大语言模型在商业运营决策中的**“平静态对齐幻觉（Calm-State Alignment Illusion）”**展开：许多在静态无压伦理评测中零违规（`V0 C = 0%`）的模型，一旦面临资源稀缺、高管施压或低可追责等日常运营摩擦，就会发生**运营规范漂移（Operational Normative Drift）**。基于形式化的**对齐-显著性阈值模型（Proposition 1 & Corollary 1）**，本仓库整合三大有机引擎：
 
-### 2. 快速复现指令
+- **`CS-Disentangler`（反事实压力解耦引擎）**：结合 200 组代数对齐宏观案例（800 条 V0–V3 提示词，364 条双人盲审验证 $\kappa = 1.000$、$\kappa_w = 0.957$、100% 精确率）与 240 组 100% 专家审定的**严格 48 词等长 8 臂企业备忘录**（`M0–MR`，120/120 A/B 对调、彻底去除元标签）及 480 条配对评测感知消融。
+- **`PGC-Auditor`（精度保障级联审计引擎）**：将零假阳性 Stage 1 精确锚点（9 格扫参验证 `pre6_post5 = 93.3%`）、Stage 2 本地 `DeBERTa-v3-large-mnli` 语义蕴含级联（覆盖 5 个开源与闭源模型共 2,480 条回复，强改写闭源模型召回率提升 `+76.56` 至 `+81.88 pp`，总一致率 **99.86%**）与 Frontier-3 **PPI** 统计校准融为一体。
+- **`SCA-Steer`（子空间合规锚定引擎）**：在 60 条校准样本上提取中后层线性合规方向（180 条独立留出测试，$d = 4.58\text{–}5.84$），推理期以 $O(d)$ 零训练代价（`<0.05%` FLOPs、**0 额外输出 token**、0 平静态安全税）将复合高压 `MB` 违规率压低 **`-34.5%` 至 `-66.7%`**。
+
+### 2. 真实思考过程、踩过的坑与独特观察
+
+在把这套系统从最初原型一步步打磨到稳定可复现的过程中，我们踩过五个非常真实的坑，也正是这些坑倒逼出了最终的方法论：
+
+1. **笛卡尔积拼接的 80% 隐性错配坑**：早期用 $5\times 5\times 5$ 蓝图直接组合 1,000 个场景，结果第一轮领域专家审核发现跨家族组合（`c_idx != a_idx`）接受率仅 `66.7%`。引入代数结构对齐条件 `(r + g) ≡ 0 (mod 5)` 后，接受率立刻跃升 `+15.3 pp` 至 `82.0%`（$p = 3.18\times 10^{-4}$），第二轮重写原生连贯语境后达到 `100.0%`（240/240）。
+2. **显性实验标签诱发评测感知（Evaluation Awareness）坑**：早期提示词里保留了 `Pressure condition V3_combined_pressure:` 这类测试抬头；补做 480 条配对消融后惊讶地发现，仅凭这一行标签就会让 `Qwen2.5-3B` 的违规概率被人为压低 `-27.3%`（Wilcoxon $p = 1.24\times 10^{-18}$），闭源前沿模型的内部思考 token 也会随之偏移（$p = 0.031$）。彻底洗掉所有元标签后，我们确认子加性“护栏悖论”依然真实存在（$p = 3.81\times 10^{-6}$）。
+3. **8B 开源裁判崩塌与“护短”偏置坑**：早期把 5 套自动裁判混在一起看，V3 判定差异高达 `66.1 pp`。按能力分层后才看清真相：`Llama 3.1 8B` 当裁判时会把 `60.4%–78.6%` 的平静基线误判为直接违规，且对自己家族存在 `-0.117` 自我宽容偏置；剥离 8B 裁判并引入 Frontier-3 PPI 校准后，商业目标分歧骤降至 `0.3 pp`。
+4. **精确锚点在强改写闭源模型上的召回断崖坑**：精确锚点虽能保证零假阳性，但遇到喜欢自主改写表述的闭源前沿模型（`GPT-6.2-Sol` 与 `GPT-6.1-Terra`）时，Stage 1 覆盖率暴跌至 `4.22%–9.22%`。把未判定样本级联交给本地 `DeBERTa-v3-large-mnli` 后，零 API 成本挽回 `+76.56` 至 `+81.88 pp` 覆盖率，且 Choice–Action 一致率达 `100.0%`（1,100/1,100）。
+5. **表层提示词解药的容量失效边界**：等长约束重锚定（`MR`）在 `Qwen2.5-7B` 上几乎抹平违规（`2.92% -> 0.83%`），但在 `3B`（`9.58%`）和被截断思考链的 `DeepSeek-R1-7B`（`29.58%`）上完全失效；白盒投影显示压力把合规表征拉偏了 `4.4–9.3` 个单位，表层提示词拉不回来，这直接催生了零额外 token 的白盒 `SCA-Steer` 引导方案。
+
+### 3. 快速复现与隐私说明
 
 ```bash
-# Study 1 离线单元测试与多裁判恒等式复核（零外部依赖）
+# 安装可选科学计算依赖（基础离线测试仅需 Python 3.10+ 标准库）
+python -m pip install -r requirements.txt
+
+# 运行 13 项单元测试与离线结果核验
 python -m unittest discover -s tests -v
 python analysis/analyze_retained_bundle.py
-python demo.py
-
-# Study 2 Wave 0 统计校准、9 格窗口扫参与 8 臂净身数据集重建
 python study2/scripts/wave0_stats_upgrade.py
 python study2/scripts/stage2_nli_and_window_sweep.py sweep
 python study2/scripts/build_study2_clean_pack.py
+python demo.py
 ```
 
-### 3. 隐私与安全说明
-
-- 公开仓库不包含任何 API 密钥、个人私有环境文件（`.env` 已全局写入 `.gitignore`）或受限私有原始日志；所有脚本均支持通过环境变量与公开权重离线复现。欢迎通过 GitHub Issues 交流讨论。
+- **脱敏与隐私承诺**：本仓库严格不含任何 API 密钥、私有网关地址、`.env` 环境文件（已全局列入 `.gitignore`）或个人私有日志；所有闭源调用脚本均采用空模板 [`study2/env.example`](study2/env.example) 与预算熔断保护。欢迎提交 Issue 或 PR 指正！
